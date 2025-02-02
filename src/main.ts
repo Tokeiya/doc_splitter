@@ -1,5 +1,5 @@
-console.log("hello world")
+import {readFileSync} from "fs";
 
-function add(x:number,y:number):number{
-    return x+y
-}
+let str="hello world";
+let iter=str[Symbol.iterator]();
+
