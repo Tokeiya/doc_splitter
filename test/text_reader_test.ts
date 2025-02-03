@@ -1,6 +1,5 @@
-import {TextStream} from "../src/text_stream";
 import {TextReader} from "../src/text_reader";
-import {describe, it} from "mocha";
+import {suite, test} from "mocha";
 import {assert} from "chai";
 import {readFileSync} from 'fs'
 import {OutOfTransactionError} from "../src/out_of_transaction_error";
@@ -11,8 +10,8 @@ function read_sample(path: string): string {
 }
 
 
-describe("TextReader", () => {
-    it('ctor', () => {
+suite("TextReader", () => {
+    test('ctor', () => {
         let str = read_sample("./test/sample_texts/simple_text")
         let fixture = new TextReader(str);
 
@@ -21,14 +20,14 @@ describe("TextReader", () => {
         assert.isUndefined(fixture.current);
     });
 
-    it('source', () => {
+    test('source', () => {
         let scr = read_sample("./test/sample_texts/simple_text")
         let fixture = new TextReader(scr);
 
         assert.equal(fixture.source, scr);
     });
 
-    it('next and current', () => {
+    test('next and current', () => {
         let fixture = new TextReader("abc");
 
         assert.isUndefined(fixture.current);
@@ -49,7 +48,7 @@ describe("TextReader", () => {
         assert.isUndefined(fixture.current);
     });
 
-    it('begin and commit', () => {
+    test('begin and commit', () => {
         let fixture = new TextReader("hello world");
 
         assert.equal(fixture.transaction_depth, 0);
@@ -84,12 +83,12 @@ describe("TextReader", () => {
         assert.isUndefined(fixture.current);
     });
 
-    it('invalid commit', () => {
+    test('invalid commit', () => {
         let fixture = new TextReader('abc');
         assert.throws(() => fixture.commit(), OutOfTransactionError)
     });
 
-    it('simple rollback', () => {
+    test('simple rollback', () => {
         let fixture = new TextReader("abc def");
 
         assert.equal(fixture.begin(), 1);
@@ -123,7 +122,7 @@ describe("TextReader", () => {
     });
 
 
-    it('invalid rollback', () => {
+    test('invalid rollback', () => {
         let fixture = new TextReader('abc');
         fixture.next();
 
