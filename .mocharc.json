@@ -1,4 +1,5 @@
 {
-  "node-option": ["import=tsx"]
+  "node-option": [
+    "import=tsx"
+  ]
 }
-
