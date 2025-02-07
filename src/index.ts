@@ -1,6 +1,10 @@
-import {readFileSync} from "fs";
+import { readFileSync } from 'fs';
 
+let array: Array<number> = [];
+array.push(0);
+array.push(1);
+array.push(2);
 
-for (let i: number = 0; i < 5; i++) {
-    console.log(i)
-}
+console.log(array[0]);
+console.log(array[2]);
+console.log(array[10]);
